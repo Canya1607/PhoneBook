@@ -12,14 +12,10 @@ import AppContainer from './routes/index';
 
 class App extends React.Component {
   render() {
+    //TODO: Remove then
+    console.disableYellowBox = true;
     return <AppContainer />;
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-});
 
 export default App;

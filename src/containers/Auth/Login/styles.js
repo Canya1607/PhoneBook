@@ -1,5 +1,7 @@
-import {StyleSheet} from 'react-native';
+import {StyleSheet, Platform} from 'react-native';
 import size from '../../../constants/size';
+
+const margin = Platform.OS === 'android' ? 24 : null;
 
 const styles = StyleSheet.create({
   screen: {
@@ -23,6 +25,7 @@ const styles = StyleSheet.create({
     height: size.Width * 0.25,
   },
   bottom_text: {
+    marginBottom: margin,
     color: '#FCD6B5',
   },
 });

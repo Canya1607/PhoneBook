@@ -10,6 +10,7 @@ const styles = StyleSheet.create({
   },
   container: {
     flex: 1,
+    alignItems: 'center',
   },
   image: {
     alignItems: 'center',
@@ -20,6 +21,9 @@ const styles = StyleSheet.create({
     marginBottom: size.Height * 0.08,
     width: size.Width * 0.25,
     height: size.Width * 0.25,
+  },
+  bottom_text: {
+    color: '#FCD6B5',
   },
 });
 

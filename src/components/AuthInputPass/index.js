@@ -1,8 +1,7 @@
 /* eslint-disable react-native/no-inline-styles */
 import React, {Component} from 'react';
-import {View, TextInput, Text, Image} from 'react-native';
+import {View, TextInput, Image, TouchableWithoutFeedback} from 'react-native';
 import styles from '../AuthInput/styles';
-import {TouchableWithoutFeedback} from 'react-native-gesture-handler';
 
 class AuthInputPass extends Component {
   constructor(props) {

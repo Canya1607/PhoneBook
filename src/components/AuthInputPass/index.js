@@ -15,24 +15,26 @@ class AuthInputPass extends Component {
 
   render() {
     const props = this.props;
-    const image = {
-      eyeOpened: require('../../assets/images/eye_open.png'),
-      eyeClosed: require('../../assets/images/eye_close.png'),
+    const images = {
+      lock: require('../../assets/images/lock.png'),
+      unlock: require('../../assets/images/unlock.png'),
     };
     return (
       <View style={styles.container}>
-        <Text style={styles.text}>{props.text}</Text>
+        <Image source={props.image} />
         <TextInput
           style={styles.input}
           value={props.value}
+          placeholder={props.text}
+          placeholderTextColor={'#CCBBB7'}
           secureTextEntry={this.state.hide}
-          textBreakStrategy="balanced"
         />
         <View style={{position: 'absolute', paddingRight: 10}}>
           <TouchableWithoutFeedback
             onPress={() => this.setState({hide: !this.state.hide})}>
             <Image
-              source={this.state.hide ? image.eyeClosed : image.eyeOpened}
+              style={{}}
+              source={this.state.hide ? images.lock : images.unlock}
             />
           </TouchableWithoutFeedback>
         </View>

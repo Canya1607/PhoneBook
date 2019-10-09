@@ -40,6 +40,8 @@ target 'Phonebook' do
 
   pod 'RNScreens', :path => '../node_modules/react-native-screens'
 
+  pod 'react-native-image-picker', :path => '../node_modules/react-native-image-picker'
+
   target 'PhonebookTests' do
     inherit! :search_paths
     # Pods for testing

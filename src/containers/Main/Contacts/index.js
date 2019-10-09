@@ -4,7 +4,7 @@ import ImagePicker from 'react-native-image-picker';
 import styles from './styles';
 
 class Contacts extends Component {
-  myFucntion = () => {
+  myFunction = () => {
     const options = {
       title: 'Select Avatar',
       customButtons: [{name: 'fb', title: 'Choose Photo from Facebook'}],
@@ -40,7 +40,7 @@ class Contacts extends Component {
     return (
       <SafeAreaView style={styles.container}>
         <View>
-          <Button title="Pick Image" onPress={() => this.myFucntion()} />
+          <Button title="Pick Image" onPress={() => this.myFunction()} />
           <Text>Contacts</Text>
         </View>
       </SafeAreaView>

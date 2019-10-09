@@ -7,7 +7,6 @@
  */
 
 import React from 'react';
-import {SafeAreaView, StyleSheet} from 'react-native';
 import AppContainer from './routes/index';
 
 class App extends React.Component {

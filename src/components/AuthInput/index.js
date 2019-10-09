@@ -1,15 +1,16 @@
 import React from 'react';
-import {View, Text, TextInput} from 'react-native';
+import {View, Image, TextInput} from 'react-native';
 import styles from './styles';
 
-const AuthInput = ({text, placeholder, value, onChange}) => {
+const AuthInput = ({text, value, onChange}) => {
   return (
     <View style={styles.container}>
-      <Text style={styles.text}>{text}</Text>
+      <Image source={require('../../assets/images/enter.png')} />
       <TextInput
         style={styles.input}
         value={value}
-        placeholder={placeholder}
+        placeholder={text}
+        placeholderTextColor={'#CCBBB7'}
         onChange={onChange}
       />
     </View>

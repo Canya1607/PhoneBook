@@ -8,12 +8,12 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginBottom: 15,
   },
-  text: {
+  icon: {
     width: size.Width * 0.19,
     textAlign: 'right',
     alignSelf: 'center',
     fontSize: 18,
-    // color: '#8A8A8F',
+    color: '#2D3047',
   },
   input: {
     width: size.Width * 0.58,
@@ -22,7 +22,7 @@ const styles = StyleSheet.create({
     paddingRight: 32,
     borderWidth: 0.5,
     borderRadius: 6,
-    // borderColor: 'gray',
+    borderColor: '#2D3047',
     marginLeft: 7,
   },
 });

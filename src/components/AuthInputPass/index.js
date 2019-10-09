@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 /* eslint-disable react-native/no-inline-styles */
 import React, {Component} from 'react';
 import {View, TextInput, Text, Image} from 'react-native';
@@ -14,20 +15,23 @@ class AuthInputPass extends Component {
   }
 
   render() {
-    const props = this.props;
+    const {image, text, value, placeholderOn, onBlur, onFocus, onChange} = this.props;
     const images = {
       lock: require('../../assets/images/lock.png'),
       unlock: require('../../assets/images/unlock.png'),
     };
     return (
       <View style={styles.container}>
-        <Image source={props.image} />
+        <Image source={image} />
         <TextInput
           style={styles.input}
-          value={props.value}
-          placeholder={props.text}
+          value={value}
+          placeholder={placeholderOn === true ? text : null}
           placeholderTextColor={'#CCBBB7'}
           secureTextEntry={this.state.hide}
+          onBlur={onBlur}
+          onFocus={onFocus}
+          onChange={onChange}
         />
         <View style={{position: 'absolute', paddingRight: 10}}>
           <TouchableWithoutFeedback

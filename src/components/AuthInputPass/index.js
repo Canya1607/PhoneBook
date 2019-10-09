@@ -1,9 +1,7 @@
-/* eslint-disable prettier/prettier */
 /* eslint-disable react-native/no-inline-styles */
 import React, {Component} from 'react';
-import {View, TextInput, Text, Image} from 'react-native';
+import {View, TextInput, Image, TouchableWithoutFeedback} from 'react-native';
 import styles from '../AuthInput/styles';
-import {TouchableWithoutFeedback} from 'react-native-gesture-handler';
 
 class AuthInputPass extends Component {
   constructor(props) {
@@ -15,7 +13,7 @@ class AuthInputPass extends Component {
   }
 
   render() {
-    const {image, text, value, placeholderOn, onBlur, onFocus, onChange} = this.props;
+    const {image, text, value, onChange} = this.props;
     const images = {
       lock: require('../../assets/images/lock.png'),
       unlock: require('../../assets/images/unlock.png'),
@@ -26,11 +24,9 @@ class AuthInputPass extends Component {
         <TextInput
           style={styles.input}
           value={value}
-          placeholder={placeholderOn === true ? text : null}
-          placeholderTextColor={'#CCBBB7'}
+          placeholder={text}
+          placeholderTextColor={'#e5dcdb'}
           secureTextEntry={this.state.hide}
-          onBlur={onBlur}
-          onFocus={onFocus}
           onChange={onChange}
         />
         <View style={{position: 'absolute', paddingRight: 10}}>

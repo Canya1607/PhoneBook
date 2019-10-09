@@ -9,32 +9,18 @@ import styles from './styles';
 class Login extends Component {
   state = {
     hideRepeat: true,
-    placeholdersOn: [true, true, true],
     login: null,
     password: null,
   };
 
   renderRepeat = () => {
-    return (
-      <AuthInputPass
-        text="Repeat Password"
-        image={require('../../../assets/images/keyhole.png')}
-        placeholderOn={this.state.placeholdersOn[2]}
-        onFocus={() => this.togglePlaceholder(2)}
-        onBlur={() => this.togglePlaceholder(2)}/>
-    );
+    return <AuthInputPass text="Repeat Password" image={require('../../../assets/images/keyhole.png')}/>;
   }
 
   checkAndContinue = () => {
     //TODO: Validate input fields
     this.props.navigation.navigate('Main');
   }
-
-  togglePlaceholder = (index) => {
-    const {placeholdersOn} = this.state;
-    placeholdersOn[index] = !placeholdersOn[index];
-    this.setState({placeholdersOn: placeholdersOn});
-  };
 
   render() {
     return (
@@ -47,16 +33,10 @@ class Login extends Component {
             />
           </View>
           <AuthInput
-            text="Login"
-            placeholderOn={this.state.placeholdersOn[0]}
-            onFocus={() => this.togglePlaceholder(0)}
-            onBlur={() => this.togglePlaceholder(0)}/>
+            text="Login"/>
           <AuthInputPass
             text="Password"
-            image={require('../../../assets/images/key.png')}
-            placeholderOn={this.state.placeholdersOn[1]}
-            onFocus={() => this.togglePlaceholder(1)}
-            onBlur={() => this.togglePlaceholder(1)}/>
+            image={require('../../../assets/images/key.png')}/>
           {this.state.hideRepeat ? null : this.renderRepeat()}
           <AuthButton
             text="Continue"

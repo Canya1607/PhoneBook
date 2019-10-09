@@ -2,18 +2,16 @@ import React from 'react';
 import {View, Image, TextInput} from 'react-native';
 import styles from './styles';
 
-const AuthInput = ({text, value, placeholderOn, onBlur, onFocus, onChange}) => {
+const AuthInput = ({text, value, onChange}) => {
   return (
     <View style={styles.container}>
       <Image source={require('../../assets/images/enter.png')} />
       <TextInput
         style={styles.input}
         value={value}
-        placeholder={placeholderOn === true ? text : null}
-        placeholderTextColor={'#CCBBB7'}
+        placeholder={text}
+        placeholderTextColor={'#e5dcdb'}
         onChange={onChange}
-        onBlur={onBlur}
-        onFocus={onFocus}
       />
     </View>
   );

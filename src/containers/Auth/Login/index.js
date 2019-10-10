@@ -32,8 +32,11 @@ class Login extends Component {
               source={require('../../../assets/images/phonebook.png')}
             />
           </View>
-          <AuthInput text="Login"/>
-          <AuthInputPass text="Password" image={require('../../../assets/images/key.png')}/>
+          <AuthInput
+            text="Login"/>
+          <AuthInputPass
+            text="Password"
+            image={require('../../../assets/images/key.png')}/>
           {this.state.hideRepeat ? null : this.renderRepeat()}
           <AuthButton
             text="Continue"

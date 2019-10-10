@@ -13,20 +13,21 @@ class AuthInputPass extends Component {
   }
 
   render() {
-    const props = this.props;
+    const {image, text, value, onChange} = this.props;
     const images = {
       lock: require('../../assets/images/lock.png'),
       unlock: require('../../assets/images/unlock.png'),
     };
     return (
       <View style={styles.container}>
-        <Image source={props.image} />
+        <Image source={image} />
         <TextInput
           style={styles.input}
-          value={props.value}
-          placeholder={props.text}
-          placeholderTextColor={'#CCBBB7'}
+          value={value}
+          placeholder={text}
+          placeholderTextColor={'#e5dcdb'}
           secureTextEntry={this.state.hide}
+          onChange={onChange}
         />
         <View style={{position: 'absolute', paddingRight: 10}}>
           <TouchableWithoutFeedback

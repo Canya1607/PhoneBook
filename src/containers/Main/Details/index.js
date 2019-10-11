@@ -1,52 +1,45 @@
+/* eslint-disable prettier/prettier */
 /* eslint-disable react-native/no-inline-styles */
 import React, {Component} from 'react';
-import {SafeAreaView, View, Text} from 'react-native';
+import {SafeAreaView, View, Text, Linking} from 'react-native';
 import Dividers from '../../../components/Divider';
 import Avatar from '../../../components/Avatar';
+import Field from '../../../components/Field';
 import styles from './styles';
-import size from '../../../constants/size';
 
 class Details extends Component {
   render() {
     return (
       <SafeAreaView style={styles.container}>
-        <View style={{alignItems: 'center', marginVertical: 16}}>
+        <View style={styles.avatar}>
           <Avatar />
         </View>
         <Dividers.Divider />
-        <View style={{flexDirection: 'row', alignItems: 'center'}}>
-          <Text
-            style={{marginVertical: 16, marginHorizontal: size.Width * 0.05}}>
-            Details
-          </Text>
-          <Dividers.HeightDivider />
-        </View>
+        <Field text={"Ім'я"} placeholder={"Ім'я..."} />
         <Dividers.Divider />
-        <Text style={{marginVertical: 16, marginLeft: size.Width * 0.05}}>
-          |
-        </Text>
+        <Field text={'Прізвище'} placeholder={'Прізвище...'} />
         <Dividers.Divider />
-        <View style={{flexDirection: 'row', alignItems: 'center'}}>
-          <Text
-            style={{marginVertical: 16, marginHorizontal: size.Width * 0.05}}>
-            Details
-          </Text>
-          <Dividers.HeightDivider />
-        </View>
+        <Field text={'Посада'} placeholder={'Посада...'} />
         <Dividers.Divider />
-        <Text style={{marginVertical: 16, marginLeft: size.Width * 0.05}}>
-          |
-        </Text>
+        <Field text={'Адреса'} placeholder={'Адреса...'} />
         <Dividers.Divider />
-        <View style={{flexDirection: 'row', alignItems: 'center'}}>
-          <Text
-            style={{marginVertical: 16, marginHorizontal: size.Width * 0.05}}>
-            Details
-          </Text>
-          <Dividers.HeightDivider />
-        </View>
+        <Field text={'Мобільний'} placeholder={'Мобільний...'} />
         <Dividers.FullDivider />
         <Dividers.FlexDivider />
+        <View style={styles.credits}>
+          <Text>Icon made by </Text>
+          <Text
+            style={{color: 'blue'}}
+            onPress={() => Linking.openURL('https://www.flaticon.com/authors/freepik')}>
+            Freepik
+          </Text>
+          <Text> from </Text>
+          <Text
+            style={{color: 'blue'}}
+            onPress={() => Linking.openURL('https://www.flaticon.com/')}>
+            Flaticon
+          </Text>
+        </View>
       </SafeAreaView>
     );
   }

@@ -13,7 +13,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#A8A8A8',
   },
   height_divider: {
-    height: size.Height * 0.035,
+    height: size.Height * 0.04,
     width: 0.5,
     backgroundColor: '#A8A8A8',
   },

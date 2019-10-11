@@ -6,6 +6,7 @@ const styles = StyleSheet.create({
     width: size.Width * 0.4,
     height: size.Width * 0.4,
     borderRadius: size.Width * 0.2,
+    backgroundColor: '#F0F0F0',
   },
 });
 

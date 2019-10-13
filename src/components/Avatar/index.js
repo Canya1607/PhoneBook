@@ -1,9 +1,9 @@
-import React, {Component} from 'react';
-import {SafeAreaView, View, Text, Button, Image} from 'react-native';
+import React from 'react';
+import {View, Image, TouchableOpacity} from 'react-native';
 import ImagePicker from 'react-native-image-picker';
 import styles from './styles';
 
-class Contacts extends Component {
+class Avatar extends React.Component {
   state = {
     avatarSource: null,
   };
@@ -31,32 +31,20 @@ class Contacts extends Component {
 
         // You can also display the image using data:
         const source = {uri: 'data:image/jpeg;base64,' + response.data};
-        console.log("URI" + response.uri);
-        this.setState({
-          avatarSource: source,
-        });
+        this.setState({avatarSource: source});
       }
     });
   };
 
   render() {
-    const {avatarSource} = this.state;
     return (
-      <SafeAreaView style={styles.container}>
-        <View style={{flex: 1}}>
-          <Image style={{width: 300, height: 400}} source={avatarSource} />
-          <Button title="Pick Image" onPress={() => this.myFunction()} />
-          <Text>Contacts</Text>
+      <TouchableOpacity onPress={() => this.myFunction()}>
+        <View style={[styles.container, {backgroundColor: 'black'}]}>
+          <Image style={styles.container} source={this.state.avatarSource} />
         </View>
-        <View>
-        <Button
-            title="Go to Details"
-            onPress={() => this.props.navigation.navigate('Details')}
-          />
-        </View>
-      </SafeAreaView>
+      </TouchableOpacity>
     );
   }
 }
 
-export default Contacts;
+export default Avatar;

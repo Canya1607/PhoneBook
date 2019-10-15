@@ -9,13 +9,14 @@ import styles from './styles';
 
 class Details extends Component {
   render() {
+    const {navigation} = this.props;
     return (
       <SafeAreaView style={styles.container}>
         <View style={styles.avatar}>
           <Avatar />
         </View>
         <Dividers.Divider />
-        <Field text={"Ім'я"} placeholder={"Ім'я..."} />
+        <Field text={"Ім'я"} placeholder={"Ім'я..."} value={navigation.getParam('name')} />
         <Dividers.Divider />
         <Field text={'Прізвище'} placeholder={'Прізвище...'} />
         <Dividers.Divider />

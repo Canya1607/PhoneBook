@@ -4,7 +4,7 @@ import Dividers from '../Divider';
 import DetailsInput from '../DetailsInput';
 import styles from './styles';
 
-const Field = ({text, placeholder}) => {
+const Field = ({text, placeholder, value}) => {
   return (
     <View style={styles.field}>
       <Text style={styles.text}>{text}</Text>
@@ -12,7 +12,7 @@ const Field = ({text, placeholder}) => {
         <Dividers.HeightDivider />
       </View>
       <View style={styles.input}>
-        <DetailsInput placeholder={placeholder} />
+        <DetailsInput placeholder={placeholder} value={value} />
       </View>
     </View>
   );

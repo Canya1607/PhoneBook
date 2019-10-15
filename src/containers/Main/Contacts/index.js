@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {SafeAreaView, View, Button, Text, SectionList} from 'react-native';
+import {SafeAreaView, Text, SectionList} from 'react-native';
 import Contact from '../../../components/Contact';
 import styles from './styles';
 

@@ -6,13 +6,13 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     padding: 8,
-    marginLeft: size.Width * 0.09,
-    width: size.Width * 0.58,
+    marginLeft: size.Width * 0.02,
+    width: size.Width * 0.675,
     borderRadius: 6,
-    backgroundColor: '#2D3047',
+    backgroundColor: '#000',
   },
   text: {
-    color: '#CCBBB7',
+    color: '#f0f0f0',
     fontSize: 18,
   },
 });

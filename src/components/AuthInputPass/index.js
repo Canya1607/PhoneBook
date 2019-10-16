@@ -25,7 +25,7 @@ class AuthInputPass extends Component {
           style={styles.input}
           value={value}
           placeholder={text}
-          placeholderTextColor={'#e5dcdb'}
+          placeholderTextColor={'#808080'}
           secureTextEntry={this.state.hide}
           onChange={onChange}
         />

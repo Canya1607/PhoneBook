@@ -10,7 +10,7 @@ const AuthInput = ({text, value, onChange}) => {
         style={styles.input}
         value={value}
         placeholder={text}
-        placeholderTextColor={'#e5dcdb'}
+        placeholderTextColor={'#808080'}
         onChange={onChange}
       />
     </View>

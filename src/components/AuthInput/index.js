@@ -11,7 +11,7 @@ const AuthInput = ({text, value, onChange}) => {
         value={value}
         placeholder={text}
         placeholderTextColor={'#808080'}
-        onChange={onChange}
+        onChangeText={onChange}
       />
     </View>
   );

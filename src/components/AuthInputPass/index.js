@@ -27,7 +27,7 @@ class AuthInputPass extends Component {
           placeholder={text}
           placeholderTextColor={'#808080'}
           secureTextEntry={this.state.hide}
-          onChange={onChange}
+          onChangeText={onChange}
         />
         <View style={{position: 'absolute', paddingRight: 10}}>
           <TouchableWithoutFeedback

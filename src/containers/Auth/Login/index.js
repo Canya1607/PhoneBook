@@ -1,6 +1,8 @@
+/* eslint-disable no-alert */
 /* eslint-disable prettier/prettier */
 import React, {Component} from 'react';
 import {SafeAreaView, View, Text, Image, TouchableOpacity} from 'react-native';
+import {connect} from 'react-redux';
 import AuthInput from '../../../components/AuthInput';
 import AuthInputPass from '../../../components/AuthInputPass';
 import AuthButton from '../../../components/AuthButton';
@@ -26,8 +28,6 @@ class Login extends Component {
 
   checkAndContinue = () => {
     const {login, password} = this.state;
-    console.log(login);
-    console.log(password);
     //TODO: Validate input fields
     if (login === '1' && password === '1') {
       this.props.navigation.navigate('Main');
@@ -72,4 +72,4 @@ class Login extends Component {
   }
 }
 
-export default Login;
+export default connect()(Login);

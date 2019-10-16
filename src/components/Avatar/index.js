@@ -39,8 +39,15 @@ class Avatar extends React.Component {
   render() {
     return (
       <TouchableOpacity onPress={() => this.myFunction()}>
-        <View style={[styles.container, {backgroundColor: 'black'}]}>
-          <Image style={styles.container} source={this.state.avatarSource} />
+        <View style={styles.container}>
+          <Image
+            style={styles.container}
+            source={
+              this.state.avatarSource === null
+                ? require('../../assets/images/avatar_default.png')
+                : this.state.avatarSource
+            }
+          />
         </View>
       </TouchableOpacity>
     );

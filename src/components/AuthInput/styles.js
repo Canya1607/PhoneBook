@@ -13,7 +13,6 @@ const styles = StyleSheet.create({
     textAlign: 'right',
     alignSelf: 'center',
     fontSize: 18,
-    color: '#2D3047',
   },
   input: {
     width: size.Width * 0.58,
@@ -22,8 +21,8 @@ const styles = StyleSheet.create({
     paddingRight: 32,
     borderWidth: 0.5,
     borderRadius: 6,
-    borderColor: '#2D3047',
-    marginLeft: 7,
+    borderColor: '#000',
+    marginLeft: 12,
   },
 });
 

@@ -1,6 +1,8 @@
+/* eslint-disable no-alert */
 /* eslint-disable prettier/prettier */
 import React, {Component} from 'react';
 import {SafeAreaView, View, Text, Image, TouchableOpacity} from 'react-native';
+import {connect} from 'react-redux';
 import AuthInput from '../../../components/AuthInput';
 import AuthInputPass from '../../../components/AuthInputPass';
 import AuthButton from '../../../components/AuthButton';
@@ -9,17 +11,29 @@ import styles from './styles';
 class Login extends Component {
   state = {
     hideRepeat: true,
-    login: null,
-    password: null,
+    login: '',
+    password: '',
+    repeatPassword: '',
   };
 
   renderRepeat = () => {
-    return <AuthInputPass text="Repeat Password" image={require('../../../assets/images/keyhole.png')}/>;
+    return (
+    <AuthInputPass
+      text="Repeat Password"
+      image={require('../../../assets/images/keyhole.png')}
+      value={this.state.repeatPassword}
+      onChange={(text) => this.setState({repeatPassword: text})}/>
+    );
   }
 
   checkAndContinue = () => {
+    const {login, password} = this.state;
     //TODO: Validate input fields
-    this.props.navigation.navigate('Main');
+    if (login === '1' && password === '1') {
+      this.props.navigation.navigate('Main');
+    } else {
+      alert('Incorrect Login or Password');
+    }
   }
 
   render() {
@@ -33,10 +47,14 @@ class Login extends Component {
             />
           </View>
           <AuthInput
-            text="Login"/>
+            text="Login"
+            value={this.state.login}
+            onChange={(text) => this.setState({login: text})}/>
           <AuthInputPass
             text="Password"
-            image={require('../../../assets/images/key.png')}/>
+            image={require('../../../assets/images/key.png')}
+            value={this.state.password}
+            onChange={(text) => this.setState({password: text})}/>
           {this.state.hideRepeat ? null : this.renderRepeat()}
           <AuthButton
             text="Continue"
@@ -54,4 +72,4 @@ class Login extends Component {
   }
 }
 
-export default Login;
+export default connect()(Login);

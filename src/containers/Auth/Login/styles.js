@@ -8,11 +8,10 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: '#659DBD',
+    backgroundColor: '#F8F8F8',
   },
   container: {
     flex: 1,
-    alignItems: 'center',
   },
   image: {
     alignItems: 'center',
@@ -26,7 +25,7 @@ const styles = StyleSheet.create({
   },
   bottom_text: {
     marginBottom: margin,
-    color: '#FCD6B5',
+    color: '#000',
   },
 });
 

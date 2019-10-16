@@ -18,13 +18,13 @@ class Details extends Component {
         <Dividers.Divider />
         <Field text={"Ім'я"} placeholder={"Ім'я..."} value={navigation.getParam('name')} />
         <Dividers.Divider />
-        <Field text={'Прізвище'} placeholder={'Прізвище...'} />
+        <Field text={'Прізвище'} placeholder={'Прізвище...'} value={navigation.getParam('surname')} />
         <Dividers.Divider />
-        <Field text={'Посада'} placeholder={'Посада...'} />
+        <Field text={'Посада'} placeholder={'Посада...'} value={navigation.getParam('work')} />
         <Dividers.Divider />
-        <Field text={'Адреса'} placeholder={'Адреса...'} />
+        <Field text={'Адреса'} placeholder={'Адреса...'} value={navigation.getParam('address')} />
         <Dividers.Divider />
-        <Field text={'Мобільний'} placeholder={'Мобільний...'} />
+        <Field text={'Мобільний'} placeholder={'Мобільний...'} value={navigation.getParam('phone')} />
         <Dividers.FullDivider />
         <Dividers.FlexDivider />
         <View style={styles.credits}>

@@ -2,10 +2,10 @@
 /* eslint-disable prettier/prettier */
 import React, {Component} from 'react';
 import {SafeAreaView, View, Text, Image, TouchableOpacity} from 'react-native';
-import {connect} from 'react-redux';
 import AuthInput from '../../../components/AuthInput';
 import AuthInputPass from '../../../components/AuthInputPass';
 import AuthButton from '../../../components/AuthButton';
+import connector from './connector';
 import styles from './styles';
 
 class Login extends Component {
@@ -72,4 +72,4 @@ class Login extends Component {
   }
 }
 
-export default connect()(Login);
+export default connector(Login);

@@ -1,12 +1,39 @@
+/* eslint-disable prettier/prettier */
 import AsyncStorage from '@react-native-community/async-storage';
+import {getUsers} from './GET';
 
-const removeUser = async () => {
-  console.log('removeUser()');
+const removeUser = async id => {
+  console.log('%cremoveUser()', 'color: #ff0000');
+  if (id < 1 || id === null || id === undefined) {
+    return null;
+  }
   try {
-    await AsyncStorage.removeItem('users');
+    const users = await getUsers();
+    if (users === null || id > users.length + 1) {
+      return null;
+    }
+    const newUsers = [];
+    users.map((x, index) => {
+      if (index !== id - 1) {
+        newUsers.push(x);
+      }
+    });
+    await AsyncStorage.setItem('users', JSON.stringify(newUsers));
   } catch (error) {
-    //Handling error
+    console.log('%cREMOVE USER ERROR', 'color: #ff0000');
+    console.log(error);
   }
 };
 
-export {removeUser};
+/**
+ * Clear all data in Storage. To access pass an Author name as an argument
+ */
+const _clearAll = Author => {
+  if (Author === 'Olexandr') {
+    AsyncStorage.clear();
+  } else {
+    console.log('Incorrect author');
+  }
+};
+
+export {removeUser, _clearAll};

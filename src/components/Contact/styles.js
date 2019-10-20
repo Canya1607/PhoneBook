@@ -2,15 +2,22 @@ import {StyleSheet} from 'react-native';
 import size from '../../constants/size';
 
 const styles = StyleSheet.create({
-  contact: {
+  container: {
+    flex: 1,
     width: size.Width * 0.85,
     margin: 4,
     padding: 8,
+    borderRadius: 8,
+    backgroundColor: '#E8E8E8',
+    flexDirection: 'row',
+    justifyContent: 'flex-start',
+    alignItems: 'center'
+  },
+  contact: {
+    flex: 1,
     flexDirection: 'row',
     justifyContent: 'flex-start',
     alignItems: 'center',
-    borderRadius: 8,
-    backgroundColor: '#E8E8E8',
   },
   avatar: {
     width: size.Width * 0.14,
@@ -22,6 +29,12 @@ const styles = StyleSheet.create({
   contact_text: {
     fontSize: 16,
   },
+  edit: {
+    marginRight: 12,
+  },
+  delete: {
+    marginRight: 6,
+  }
 });
 
 export default styles;

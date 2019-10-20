@@ -29,11 +29,12 @@ class Login extends Component {
   checkAndContinue = () => {
     const {login, password} = this.state;
     //TODO: Validate input fields
-    if (login === '1' && password === '1') {
-      this.props.navigation.navigate('Main');
-    } else {
-      alert('Incorrect Login or Password');
-    }
+    // if (login === '1' && password === '1') {
+    //   this.props.navigation.navigate('Main');
+    // } else {
+    //   alert('Incorrect Login or Password');
+    // }
+    this.props.navigation.navigate('Main');
   }
 
   render() {

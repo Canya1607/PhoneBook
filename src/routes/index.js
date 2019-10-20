@@ -124,8 +124,8 @@ const MainStack = createStackNavigator(
 
 const RootSwitch = createSwitchNavigator({
   //TODO: Change TestScreen on LoginScreen
-  Auth: TestScreen,
-  // Auth: LoginScreen,
+  // Auth: TestScreen,
+  Auth: LoginScreen,
   Main: MainStack,
 });
 

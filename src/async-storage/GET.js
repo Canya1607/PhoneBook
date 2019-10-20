@@ -24,6 +24,7 @@ const getUsers = async () => {
 const getUser = async id => {
   console.log('%cgetUser()', 'color: #ff00aa');
   console.log(id);
+
   if (id < 1 || id === null || id === undefined) {
     return null;
   }
@@ -45,8 +46,55 @@ const getUser = async id => {
   }
 };
 
-const getContacts = async id => {
-  console.log('%cgetContact()', 'color: #ff0000');
+const getContacts = async () => {
+  console.log('%cgetContacts()', 'color: #ff0000');
+
+  try {
+    const contacts = await AsyncStorage.getItem('contacts');
+    if (contacts !== null) {
+      // We have data
+      console.log('%cWe have contacts', 'color: #00ff00');
+      console.log(contacts);
+
+      return JSON.parse(contacts);
+    } else {
+      return null;
+    }
+  } catch (error) {
+    // Error retrieving data
+    console.log('%cGET CONTACTS ERROR', 'color: #ff0000');
+    console.log(error);
+  }
+};
+
+const getContactsById = async id => {
+  console.log('%cgetContact()', 'color: #ff00aa');
+  console.log(id);
+
+  if (id < 1 || id === null || id === undefined) {
+    return null;
+  }
+  try {
+    const contacts = await getContacts();
+    if (contacts === null) {
+      return null;
+    }
+    const newContacts = [];
+    contacts.map(x => {
+      if (x.id === id) {
+        newContacts.push(x);
+      }
+    });
+
+    console.log('%cWe have contacts by id', 'color: #00ff00');
+    console.log(newContacts);
+
+    return newContacts;
+  } catch (error) {
+    // Error retrieving data
+    console.log('%cGET CONTACT ERROR', 'color: #ff0000');
+    console.log(error);
+  }
 };
 
 const getKeys = async () => {
@@ -65,4 +113,4 @@ const getKeys = async () => {
   }
 };
 
-export {getUsers, getUser, getContacts, getKeys};
+export {getUsers, getUser, getContacts, getContactsById, getKeys};

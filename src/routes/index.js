@@ -14,26 +14,45 @@ class TestScreen extends React.Component {
   state = {
     response1: null,
     response2: null,
+    response3: null,
     userId: '1',
   };
 
   async componentWillMount() {
     const response1 = await Storage.getUsers();
-    this.setState({response1});
+    const response3 = await Storage.getContacts();
+    this.setState({response1, response3});
   }
 
-  renderLogins = () => {
+  renderUsers = () => {
     const resp = this.state.response1;
     let els = [];
     resp.map((x, index) => els.push(<Text key={index.toString()} style={{fontSize: 24}}>{`id: ${x.id}; login: ${x.login}`}</Text>));
     return els;
   };
 
-  setGet = async obj => {
+  renderContacts = () => {
+    const resp = this.state.response3;
+    let els = [];
+    resp.map((x, index) => {
+      // { id: 1, name: "NAME", surname: "SURNAME", work: "WORK", address: "ADDRESS", phone: "PHONE"}
+      const text = `id: ${x.id}; name: ${x.name}; surname: ${x.surname}; work: ${x.work}; address: ${x.address}, phone: ${x.phone}`;
+      els.push(<Text key={index.toString()}>{text}</Text>);
+    });
+    return els;
+  };
+
+  setUser = async obj => {
     await Storage.addUser(obj);
     const response1 = await Storage.getUsers();
     this.setState({response1});
   };
+
+  setContact = async obj => {
+    await Storage.addContact(obj);
+    const response3 = await Storage.getContacts();
+    this.setState({response3});
+  }
 
   getUser = async () => {
     const {userId} = this.state;
@@ -43,32 +62,40 @@ class TestScreen extends React.Component {
 
   delUser = async id => {
     console.log('DELETEUSER-------------------------------DELETEUSER');
-    const result = await Storage.removeUser(id);
+    await Storage.removeUser(id);
     const response1 = await Storage.getUsers();
     this.setState({response1});
   }
 
   render() {
     const user = {login: 'Login', password: 'hashedPass'};
+    const contact = { id: 1, name: "NAME", surname: "SURNAME", work: "WORK", address: "ADDRESS", phone: "PHONE"};
     return (
       <SafeAreaView style={{alignItems: 'center', flex: 1}}>
-        <View style={{flex: 1}}>{this.state.response1 && this.renderLogins()}</View>
+        <View style={{flexDirection: 'row'}}>
+          <View style={{flex: 1}}>{this.state.response1 && this.renderUsers()}</View>
+          <View style={{flex: 1}}>{this.state.response3 && this.renderContacts()}</View>
+        </View>
         <View>
           <Button
-            title={'setGet()'}
-            onPress={() => this.setGet(user)}
+            title={'setUser()'}
+            onPress={() => this.setUser(user)}
+          />
+          <Button
+            title={'setContact()'}
+            onPress={() => this.setContact(contact)}
           />
           <Text>{this.state.response2 && `id: ${this.state.response2.id}; login: ${this.state.response2.login}`}</Text>
           <Button
             title={'CLEAR'}
-            onPress={() => {Storage._clearAll('Olexandr'); this.setState({response1: null})}}
+            onPress={() => {Storage._clearAll('Olexandr'); this.setState({response1: null, response3: null})}}
           />
           <Button
             title={'Get User'}
             onPress={() => this.getUser()}
           />
           <Button
-            title={'Delete by ID'}
+            title={'Delete User by ID'}
             onPress={() => this.delUser(this.state.userId)}
           />
           <TextInput
@@ -98,6 +125,7 @@ const MainStack = createStackNavigator(
 const RootSwitch = createSwitchNavigator({
   //TODO: Change TestScreen on LoginScreen
   Auth: TestScreen,
+  // Auth: LoginScreen,
   Main: MainStack,
 });
 

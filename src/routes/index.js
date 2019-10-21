@@ -119,6 +119,7 @@ const MainStack = createStackNavigator(
   },
   {
     initialRouteName: 'Contacts',
+    mode: 'modal',
   },
 );
 

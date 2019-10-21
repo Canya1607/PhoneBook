@@ -11,7 +11,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#E8E8E8',
     flexDirection: 'row',
     justifyContent: 'flex-start',
-    alignItems: 'center'
+    alignItems: 'center',
   },
   contact: {
     flex: 1,
@@ -34,7 +34,7 @@ const styles = StyleSheet.create({
   },
   delete: {
     marginRight: 6,
-  }
+  },
 });
 
 export default styles;

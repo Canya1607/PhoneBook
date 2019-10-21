@@ -34,7 +34,7 @@ const addContact = async contactsObj => {
   console.log('%caddContact()', 'color: #ff0000');
 
   try {
-    const prevContactsArr = await getContacts(); 
+    const prevContactsArr = await getContacts();
     const contactsArr = [];
     if (prevContactsArr !== null) {
       prevContactsArr.map(x => contactsArr.push(x));

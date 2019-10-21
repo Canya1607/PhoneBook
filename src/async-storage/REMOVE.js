@@ -57,7 +57,7 @@ const removeContacts = async id => {
  * @param {*} { id: 1, name: "NAME", surname: "SURNAME", work: "WORK", address: "ADDRESS", phone: "PHONE"} 
  */
 const removeContact = async contactObj => {
-  console.log('%cremoveContact()', 'color: #00ff00')
+  console.log('%cremoveContact()', 'color: #00ff00');
   if (contactObj === null || contactObj === {}) {
     return null;
   }

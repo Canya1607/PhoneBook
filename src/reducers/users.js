@@ -5,14 +5,15 @@ const defaultState = {
   users: null,
 };
 
-const users = (state = defaultState, action) => {
+const users = async (state = defaultState, action) => {
   switch (action.type) {
     case ADD_USER:
-      return;
-    case GET_USER:
-      return;
+      return state;
+    case GET_USER: {
+      return {...state, activeUser: action.payload};
+    }
     case GET_USERS:
-      return;
+      return {...state, users: action.payload};
     case REMOVE_USER:
       return;
     default:

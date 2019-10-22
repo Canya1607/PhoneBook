@@ -1,5 +1,7 @@
 import AsyncStorage from '@react-native-community/async-storage';
 import {getUsers, getContacts} from './GET';
+import {GET_USER} from '../actions/types';
+import store from '../store';
 
 const addUser = async userObj => {
   console.log('%caddUser()', 'color: #ff0000');
@@ -20,6 +22,10 @@ const addUser = async userObj => {
     usersArr.push(newUserObj);
 
     await AsyncStorage.setItem('users', JSON.stringify(usersArr));
+
+    delete newUserObj.password;
+    store.dispatch({type: GET_USER, payload: newUserObj});
+    return newUserObj;
   } catch (error) {
     // Error saving data
     console.log('%cADD USER', 'color: #ff0000');

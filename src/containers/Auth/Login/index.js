@@ -1,11 +1,12 @@
 /* eslint-disable no-alert */
 /* eslint-disable prettier/prettier */
-import React, {Component} from 'react';
-import {SafeAreaView, View, Text, Image, TouchableOpacity} from 'react-native';
+import React, {Component, useEffect} from 'react';
+import {SafeAreaView, View, Text, Image, TouchableOpacity, Button} from 'react-native';
 import AuthInput from '../../../components/AuthInput';
 import AuthInputPass from '../../../components/AuthInputPass';
 import AuthButton from '../../../components/AuthButton';
 import connector from './connector';
+import Storage from '../../../async-storage';
 import styles from './styles';
 
 class Login extends Component {
@@ -15,6 +16,22 @@ class Login extends Component {
     password: '',
     repeatPassword: '',
   };
+
+  static getDerivedStateFromProps(nextProps, prevState) {
+    console.log(nextProps);
+    console.log(prevState);
+    if (JSON.stringify(nextProps.activeUser) !== JSON.stringify(prevState.activeUser)) {
+      return {
+        activeUser: nextProps.activeUser,
+      };
+    }
+    return null;
+  }
+
+  async componentDidMount() {
+    console.log('componentDidMount()');
+    await Storage.getUsers();
+  }
 
   renderRepeat = () => {
     return (
@@ -26,18 +43,36 @@ class Login extends Component {
     );
   }
 
-  checkAndContinue = () => {
-    const {login, password} = this.state;
-    //TODO: Validate input fields
-    // if (login === '1' && password === '1') {
-    //   this.props.navigation.navigate('Main');
-    // } else {
-    //   alert('Incorrect Login or Password');
-    // }
-    this.props.navigation.navigate('Main');
+  async checkAndContinue() {
+    const {hideRepeat, login, password, repeatPassword} = this.state;
+    let userObj = {
+      login: login,
+      password: password,
+    };
+    if (login !== '' && password !== '') {
+      if (hideRepeat) {
+        const response = await Storage.getUser(userObj);
+        if (response !== null) {
+          this.props.navigation.navigate('Main');
+        }
+
+      } else {
+        if (password === repeatPassword) {
+          await Storage.addUser(userObj);
+          this.props.navigation.navigate('Main');
+        }
+      }
+
+      // console.log(this.state.activeUser);
+      // if (this.state.activeUser) {
+      //   this.props.navigation.navigate('Main');
+      // }
+    }
   }
 
   render() {
+    //
+    console.log(this);
     return (
       <SafeAreaView style={styles.screen}>
         <View style={styles.container}>
@@ -59,7 +94,7 @@ class Login extends Component {
           {this.state.hideRepeat ? null : this.renderRepeat()}
           <AuthButton
             text="Continue"
-            onPress={this.checkAndContinue} />
+            onPress={() => this.checkAndContinue()} />
         </View>
         <View style={styles.bottom}>
           <TouchableOpacity onPress={() => this.setState({hideRepeat: !this.state.hideRepeat})}>

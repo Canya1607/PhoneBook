@@ -1,6 +1,8 @@
 import AsyncStorage from '@react-native-community/async-storage';
+import {GET_USER, GET_USERS} from '../actions/types';
+import store from '../store';
 
-const getUsers = async () => {
+async function getUsers() {
   console.log('%cgetUsers()', 'color: #ff0000');
 
   try {
@@ -9,7 +11,7 @@ const getUsers = async () => {
       // We have data
       console.log('%cWe have data', 'color: #00ff00');
       console.log(users);
-
+      store.dispatch({type: GET_USERS, payload: JSON.parse(users)});
       return JSON.parse(users);
     } else {
       return null;
@@ -19,25 +21,32 @@ const getUsers = async () => {
     console.log('%cGET USERS ERROR', 'color: #ff0000');
     console.log(error);
   }
-};
+}
 
-const getUser = async id => {
+const getUser = async userObj => {
   console.log('%cgetUser()', 'color: #ff00aa');
-  console.log(id);
+  console.log(userObj);
 
-  if (id < 1 || id === null || id === undefined) {
-    return null;
-  }
   try {
-    const users = await AsyncStorage.getItem('users');
-    if (users === null || id > users.length + 1) {
+    const users = await getUsers();
+    if (users === null || userObj === null) {
       return null;
     }
-    const user = JSON.parse(users)[id - 1];
+
+    let user = null;
+    for (let i = 0; i < users.length; i++) {
+      if (users[i].login === userObj.login) {
+        if (users[i].password === userObj.password) {
+          user = users[i];
+          delete user.password;
+        }
+      }
+    }
 
     console.log('%cWe have user', 'color: #00ff00');
     console.log(user);
 
+    store.dispatch({type: GET_USER, payload: user});
     return user;
   } catch (error) {
     // Error retrieving data

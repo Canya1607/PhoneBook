@@ -11,23 +11,16 @@ import styles from './styles';
 
 class Login extends Component {
   state = {
-    activeUser: null,
-
     hideRepeat: true,
     login: '',
     password: '',
     repeatPassword: '',
   };
 
+  //TODO: Remove in Release
   static getDerivedStateFromProps(nextProps, prevState) {
     console.log(nextProps);
     console.log(prevState);
-    if (JSON.stringify(nextProps.activeUser) !== JSON.stringify(prevState.activeUser)) {
-      console.log("GET DERIVED STATE FROM PROPS")
-      return {
-        activeUser: nextProps.activeUser,
-      };
-    }
     return null;
   }
 
@@ -56,8 +49,8 @@ class Login extends Component {
         }
       }
 
-      console.log(this.state.activeUser);
-      if (this.state.activeUser) {
+      console.log(this.props.activeUser);
+      if (this.props.activeUser) {
         this.props.navigation.navigate('Main');
       }
     }

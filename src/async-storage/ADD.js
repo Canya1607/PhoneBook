@@ -40,7 +40,7 @@ const addUser = async userObj => {
 };
 
 /**
- * @param {*} { id: 1, name: "NAME", surname: "SURNAME", work: "WORK", address: "ADDRESS", phone: "PHONE"} 
+ * @param {*} { id: "cf3432423", userId: 1, name: "NAME", surname: "SURNAME", work: "WORK", address: "ADDRESS", phone: "PHONE"}
  */
 const addContact = async contactsObj => {
   console.log('%caddContact()', 'color: #ff0000');
@@ -55,7 +55,10 @@ const addContact = async contactsObj => {
     console.log('%cprevContactsArr', 'color: #ffff00');
     console.log(prevContactsArr);
 
-    contactsArr.push(contactsObj);
+    const uniqueId = `c${(~~(Math.random() * 1e8)).toString(16)}`;
+    const newContactsObj = {id: uniqueId, ...contactsObj};
+
+    contactsArr.push(newContactsObj);
     await AsyncStorage.setItem('contacts', JSON.stringify(contactsArr));
   } catch (error) {
     // Error saving data

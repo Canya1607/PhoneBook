@@ -3,7 +3,7 @@ import {View, Text, TouchableOpacity} from 'react-native';
 import {CREATE} from '../../constants/detailsTypes';
 import styles from './styles';
 
-const ContactCreate = ({navigation}) => {
+const ContactCreate = ({navigation, userId}) => {
   return (
     <TouchableOpacity
       onPress={() =>
@@ -14,6 +14,7 @@ const ContactCreate = ({navigation}) => {
           work: null,
           address: null,
           phone: null,
+          userId: userId,
         })
       }>
       <View style={styles.container}>

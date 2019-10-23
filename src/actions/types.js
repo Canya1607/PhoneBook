@@ -5,8 +5,4 @@ export const SET_USERS = 'SET_USERS';
 
 // CONTACTS
 
-export const ADD_CONTACT = 'ADD_CONTACT_BY_OBJ';
-export const GET_CONTACT = 'GET_CONTACT_BY_ID';
-export const GET_CONTACTS = 'GET_CONTACTS';
-export const REMOVE_CONTACT = 'REMOVE_CONTACT_BY_OBJ';
-export const REMOVE_CONTACTS = 'REMOVE_CONTACTS';
+export const SET_CONTACTS = 'SET_CONTACTS';

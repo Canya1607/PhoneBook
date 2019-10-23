@@ -4,7 +4,7 @@ import Dividers from '../Divider';
 import DetailsInput from '../DetailsInput';
 import styles from './styles';
 
-const Field = ({text, placeholder, value, editable}) => {
+const Field = ({text, placeholder, value, editable, onChangeText}) => {
   return (
     <View style={styles.field}>
       <Text style={styles.text}>{text}</Text>
@@ -16,6 +16,7 @@ const Field = ({text, placeholder, value, editable}) => {
           placeholder={placeholder}
           value={value}
           editable={editable}
+          onChangeText={onChangeText}
         />
       </View>
     </View>

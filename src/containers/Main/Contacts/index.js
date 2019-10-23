@@ -1,8 +1,10 @@
 /* eslint-disable prettier/prettier */
 import React, {Component} from 'react';
-import {SafeAreaView, Text, SectionList, FlatList} from 'react-native';
+import {SafeAreaView, FlatList} from 'react-native';
 import Contact from '../../../components/Contact';
 import ContactCreate from '../../../components/ContactCreate';
+import Storage from '../../../async-storage';
+import connector from './connector';
 import styles from './styles';
 
 const data = [
@@ -30,6 +32,26 @@ class Contacts extends Component {
     };
   };
 
+  state = {
+    data: null,
+  }
+
+  async componentDidMount() {
+    console.log('componentDidMount');
+    await Storage.getContacts();
+  }
+
+  static getDerivedStateFromProps(nextProps, prevState) {
+    console.log(nextProps);
+    console.log(prevState);
+    if (JSON.stringify(prevState.data) !== JSON.stringify(prevState.contacts)) {
+      return {
+        data: nextProps.contacts,
+      };
+    }
+    return null;
+  }
+
   onDelete = (obj) => {
     //TODO: Implement when redux will be ready
   }
@@ -38,9 +60,9 @@ class Contacts extends Component {
     const {navigation} = this.props;
     return (
       <SafeAreaView style={styles.container}>
-        <ContactCreate navigation={navigation} />
+        <ContactCreate navigation={navigation} userId={this.props.activeUser.id} />
         <FlatList
-          data={data}
+          data={this.state.data}
           initialNumToRender={9}
           keyExtractor={(item, index) => item.name + index}
           renderItem={({item}) => (
@@ -52,4 +74,4 @@ class Contacts extends Component {
   }
 }
 
-export default Contacts;
+export default connector(Contacts);

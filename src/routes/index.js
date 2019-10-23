@@ -88,7 +88,7 @@ class TestScreen extends React.Component {
           <Text>{this.state.response2 && `id: ${this.state.response2.id}; login: ${this.state.response2.login}`}</Text>
           <Button
             title={'CLEAR'}
-            onPress={() => {Storage._clearAll('Olexandr'); this.setState({response1: null, response3: null})}}
+            onPress={() => {Storage._clearAll('Olexandr'); this.setState({response1: null, response3: null});}}
           />
           <Button
             title={'Get User'}

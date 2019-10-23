@@ -8,12 +8,7 @@ const mapStateToProps = state => {
   };
 };
 
-const mapDispatchToProps = dispatch => {
-  return {
-    getUser: userObj => dispatch({type: GET_USER, payload: userObj}),
-    addUser: userObj => dispatch({type: ADD_USER, payload: userObj}),
-  };
-};
+const mapDispatchToProps = dispatch => {};
 
 export default connect(
   mapStateToProps,

@@ -1,5 +1,4 @@
 import {connect} from 'react-redux';
-import {GET_USER, ADD_USER} from '../../../actions/types';
 
 const mapStateToProps = state => {
   return {
@@ -8,7 +7,9 @@ const mapStateToProps = state => {
   };
 };
 
-const mapDispatchToProps = dispatch => {};
+const mapDispatchToProps = dispatch => {
+  return {};
+};
 
 export default connect(
   mapStateToProps,

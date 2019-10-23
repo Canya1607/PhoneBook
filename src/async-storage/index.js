@@ -1,6 +1,6 @@
 import {getUsers, getUser, getContacts, getContactsById, getKeys} from './GET';
 import {removeUser, removeContact, removeContacts, _clearAll} from './REMOVE';
-import {addUser, addContact} from './SET';
+import {addUser, addContact} from './ADD';
 
 export default {
   //SET

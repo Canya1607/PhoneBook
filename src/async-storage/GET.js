@@ -1,8 +1,9 @@
 import AsyncStorage from '@react-native-community/async-storage';
-import {GET_USER, GET_USERS} from '../actions/types';
 import store from '../store';
+import {SET_USERS, SET_USER} from '../actions/types';
 
 async function getUsers() {
+  console.log('\n\n\n\n\n');
   console.log('%cgetUsers()', 'color: #ff0000');
 
   try {
@@ -11,7 +12,8 @@ async function getUsers() {
       // We have data
       console.log('%cWe have data', 'color: #00ff00');
       console.log(users);
-      store.dispatch({type: GET_USERS, payload: JSON.parse(users)});
+
+      // store.dispatch({type: SET_USERS, payload: JSON.parse(users)});
       return JSON.parse(users);
     } else {
       return null;
@@ -32,7 +34,6 @@ const getUser = async userObj => {
     if (users === null || userObj === null) {
       return null;
     }
-
     let user = null;
     for (let i = 0; i < users.length; i++) {
       if (users[i].login === userObj.login) {
@@ -46,7 +47,7 @@ const getUser = async userObj => {
     console.log('%cWe have user', 'color: #00ff00');
     console.log(user);
 
-    store.dispatch({type: GET_USER, payload: user});
+    store.dispatch({type: SET_USER, payload: user});
     return user;
   } catch (error) {
     // Error retrieving data

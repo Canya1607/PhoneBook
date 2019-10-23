@@ -1,21 +1,16 @@
-import {ADD_USER, GET_USER, GET_USERS, REMOVE_USER} from '../actions/types';
+import {SET_USER, SET_USERS} from '../actions/types';
 
 const defaultState = {
   activeUser: null,
-  users: null,
+  // users: null,
 };
 
-const users = async (state = defaultState, action) => {
+const users = (state = defaultState, action) => {
   switch (action.type) {
-    case ADD_USER:
-      return state;
-    case GET_USER: {
+    case SET_USER:
       return {...state, activeUser: action.payload};
-    }
-    case GET_USERS:
-      return {...state, users: action.payload};
-    case REMOVE_USER:
-      return;
+    // case SET_USERS:
+    //   return {...state, users: action.payload};
     default:
       return state;
   }

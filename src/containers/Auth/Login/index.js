@@ -1,16 +1,18 @@
 /* eslint-disable no-alert */
 /* eslint-disable prettier/prettier */
-import React, {Component, useEffect} from 'react';
-import {SafeAreaView, View, Text, Image, TouchableOpacity, Button} from 'react-native';
+import React, {Component} from 'react';
+import {SafeAreaView, View, Text, Image, TouchableOpacity} from 'react-native';
 import AuthInput from '../../../components/AuthInput';
 import AuthInputPass from '../../../components/AuthInputPass';
 import AuthButton from '../../../components/AuthButton';
-import connector from './connector';
 import Storage from '../../../async-storage';
+import connector from './connector';
 import styles from './styles';
 
 class Login extends Component {
   state = {
+    activeUser: null,
+
     hideRepeat: true,
     login: '',
     password: '',
@@ -21,16 +23,12 @@ class Login extends Component {
     console.log(nextProps);
     console.log(prevState);
     if (JSON.stringify(nextProps.activeUser) !== JSON.stringify(prevState.activeUser)) {
+      console.log("GET DERIVED STATE FROM PROPS")
       return {
         activeUser: nextProps.activeUser,
       };
     }
     return null;
-  }
-
-  async componentDidMount() {
-    console.log('componentDidMount()');
-    await Storage.getUsers();
   }
 
   renderRepeat = () => {
@@ -49,30 +47,25 @@ class Login extends Component {
       login: login,
       password: password,
     };
-    if (login !== '' && password !== '') {
+    if (login && password) {
       if (hideRepeat) {
-        const response = await Storage.getUser(userObj);
-        if (response !== null) {
-          this.props.navigation.navigate('Main');
-        }
-
+        await Storage.getUser(userObj);
       } else {
         if (password === repeatPassword) {
           await Storage.addUser(userObj);
-          this.props.navigation.navigate('Main');
         }
       }
 
-      // console.log(this.state.activeUser);
-      // if (this.state.activeUser) {
-      //   this.props.navigation.navigate('Main');
-      // }
+      console.log(this.state.activeUser);
+      if (this.state.activeUser) {
+        this.props.navigation.navigate('Main');
+      }
     }
   }
 
   render() {
     //
-    console.log(this);
+    console.log(this.props);
     return (
       <SafeAreaView style={styles.screen}>
         <View style={styles.container}>

@@ -1,6 +1,6 @@
 import AsyncStorage from '@react-native-community/async-storage';
 import {getUsers, getContacts} from './GET';
-import {GET_USER} from '../actions/types';
+import {SET_USER} from '../actions/types';
 import store from '../store';
 
 const addUser = async userObj => {
@@ -10,8 +10,14 @@ const addUser = async userObj => {
     const prevUsersArr = await getUsers();
     const usersArr = [];
     let lastId = 1;
-    if (prevUsersArr !== null) {
+    if (prevUsersArr) {
       lastId = prevUsersArr.length + 1;
+      for (let i = 0; i < prevUsersArr.length; i++) {
+        const el = prevUsersArr[i];
+        if (el.login === userObj.login) {
+          return null;
+        }
+      }
       prevUsersArr.map(x => usersArr.push(x));
     }
     const newUserObj = {id: lastId, ...userObj};
@@ -24,7 +30,7 @@ const addUser = async userObj => {
     await AsyncStorage.setItem('users', JSON.stringify(usersArr));
 
     delete newUserObj.password;
-    store.dispatch({type: GET_USER, payload: newUserObj});
+    store.dispatch({type: SET_USER, payload: newUserObj});
     return newUserObj;
   } catch (error) {
     // Error saving data

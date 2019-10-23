@@ -1,9 +1,7 @@
 // USERS
 
-export const ADD_USER = 'ADD_USER_BY_OBJ';
-export const GET_USER = 'GET_USER_BY_ID';
-export const GET_USERS = 'GET_USERS';
-export const REMOVE_USER = 'REMOVE_USER_BY_ID';
+export const SET_USER = 'SET_USER';
+export const SET_USERS = 'SET_USERS';
 
 // CONTACTS
 

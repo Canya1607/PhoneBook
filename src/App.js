@@ -13,7 +13,7 @@ import AppContainer from './routes/index';
 
 class App extends React.Component {
   render() {
-    //TODO: Remove then
+    //TODO: Remove in Release
     console.disableYellowBox = true;
     return (
       <Provider store={store}>

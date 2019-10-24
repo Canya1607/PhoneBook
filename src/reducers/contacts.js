@@ -1,13 +1,13 @@
 import {SET_CONTACTS} from '../actions/types';
 
 const defaultState = {
-  contacts: null,
+  activeContacts: null,
 };
 
 const contacts = (state = defaultState, action) => {
   switch (action.type) {
     case SET_CONTACTS:
-      return {contacts: action.payload};
+      return {activeContacts: action.payload};
     default:
       return state;
   }

@@ -11,7 +11,7 @@ import styles from './styles';
 
 class Login extends Component {
   state = {
-    hideRepeat: true,
+    isLogin: true,
     login: '',
     password: '',
     repeatPassword: '',
@@ -26,22 +26,20 @@ class Login extends Component {
 
   renderRepeat = () => {
     return (
-    <AuthInputPass
-      text="Repeat Password"
-      image={require('../../../assets/images/keyhole.png')}
-      value={this.state.repeatPassword}
-      onChange={(text) => this.setState({repeatPassword: text})}/>
+      <AuthInputPass
+        text="Repeat Password"
+        image={require('../../../assets/images/keyhole.png')}
+        value={this.state.repeatPassword}
+        onChange={(text) => this.setState({repeatPassword: text})}/>
     );
   }
 
   async checkAndContinue() {
-    const {hideRepeat, login, password, repeatPassword} = this.state;
-    let userObj = {
-      login: login,
-      password: password,
-    };
+    const {isLogin, login, password, repeatPassword} = this.state;
+    let userObj = {login, password};
+
     if (login && password) {
-      if (hideRepeat) {
+      if (isLogin) {
         await Storage.getUser(userObj);
       } else {
         if (password === repeatPassword) {
@@ -57,8 +55,6 @@ class Login extends Component {
   }
 
   render() {
-    //
-    console.log(this.props);
     return (
       <SafeAreaView style={styles.screen}>
         <View style={styles.container}>
@@ -71,21 +67,24 @@ class Login extends Component {
           <AuthInput
             text="Login"
             value={this.state.login}
-            onChange={(text) => this.setState({login: text})}/>
+            onChange={text => this.setState({login: text})}
+          />
           <AuthInputPass
             text="Password"
-            image={require('../../../assets/images/key.png')}
             value={this.state.password}
-            onChange={(text) => this.setState({password: text})}/>
-          {this.state.hideRepeat ? null : this.renderRepeat()}
+            image={require('../../../assets/images/key.png')}
+            onChange={text => this.setState({password: text})}
+          />
+          {this.state.isLogin ? null : this.renderRepeat()}
           <AuthButton
             text="Continue"
-            onPress={() => this.checkAndContinue()} />
+            onPress={() => this.checkAndContinue()}
+          />
         </View>
         <View style={styles.bottom}>
-          <TouchableOpacity onPress={() => this.setState({hideRepeat: !this.state.hideRepeat})}>
+          <TouchableOpacity onPress={() => this.setState({isLogin: !this.state.isLogin})}>
             <View>
-              <Text style={styles.bottom_text}>{this.state.hideRepeat ? 'Not Registered? Sign Up' : 'Have an account? Log In'}</Text>
+              <Text style={styles.bottom_text}>{this.state.isLogin ? 'Not Registered? Sign Up' : 'Have an account? Log In'}</Text>
             </View>
           </TouchableOpacity>
         </View>

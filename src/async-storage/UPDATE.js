@@ -5,7 +5,7 @@ const updateContact = async contactObj => {
 
   try {
     const data = await AsyncStorage.getItem('contacts');
-    if (data != null) {
+    if (data) {
       const contacts = JSON.parse(data);
       const newContacts = [];
       contacts.map(x => {

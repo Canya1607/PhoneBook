@@ -1,57 +1,58 @@
-/* eslint-disable prettier/prettier */
 import AsyncStorage from '@react-native-community/async-storage';
-import store from '../store';
-import {SET_CONTACTS} from '../actions/types';
 import {getUsers, getContacts, getContactsById} from './GET';
 
 const removeUser = async id => {
   console.log('%cremoveUser()', 'color: #ff0000');
 
-  if (id < 1 || id === null || id === undefined) {
-    return null;
-  }
-  try {
-    const users = await getUsers();
-    if (users === null || id > users.length + 1) {
-      return null;
-    }
-    const newUsers = [];
-    users.map((x, index) => {
-      if (index !== id - 1) {
-        newUsers.push(x);
+  if (id) {
+    try {
+      const users = await getUsers();
+      if (users) {
+        const newUsers = [];
+        users.map((x, index) => {
+          if (index !== id - 1) {
+            newUsers.push(x);
+          }
+        });
+        await AsyncStorage.setItem('users', JSON.stringify(newUsers));
+      } else {
+        return null;
       }
-    });
-    await AsyncStorage.setItem('users', JSON.stringify(newUsers));
-  } catch (error) {
-    console.log('%cREMOVE USER ERROR', 'color: #ff0000');
-    console.log(error);
+    } catch (error) {
+      console.log('%cREMOVE USER ERROR', 'color: #ff0000');
+      console.log(error);
+    }
+  } else {
+    return null;
   }
 };
 
 /**
- * Pass user id as an argument
+ * Pass user Id as an argument
  */
 const removeContacts = async id => {
   console.log('%cremoveContact()', 'color: #ff0000');
 
-  if (id < 1 || id === null || id === undefined) {
-    return null;
-  }
-  try {
-    const contacts = await getContacts();
-    if (contacts === null || id > contacts.length + 1) {
-      return null;
-    }
-    const newContacts = [];
-    contacts.map((x, index) => {
-      if (index !== id - 1) {
-        newContacts.push(x);
+  if (id) {
+    try {
+      const contacts = await getContacts();
+      if (contacts) {
+        const newContacts = [];
+        contacts.map((x, index) => {
+          if (index !== id - 1) {
+            newContacts.push(x);
+          }
+        });
+        await AsyncStorage.setItem('contacts', JSON.stringify(newContacts));
+      } else {
+        return null;
       }
-    });
-    await AsyncStorage.setItem('contacts', JSON.stringify(newContacts));
-  } catch (error) {
-    console.log('%cREMOVE CONTACT ERROR', 'color: #ff0000');
-    console.log(error);
+    } catch (error) {
+      console.log('%cREMOVE CONTACT ERROR', 'color: #ff0000');
+      console.log(error);
+    }
+  } else {
+    return null;
   }
 };
 
@@ -60,7 +61,7 @@ const removeContacts = async id => {
  */
 const removeContact = async contactObj => {
   console.log('%cremoveContact()', 'color: #00ff00');
-  if (contactObj === null || contactObj === {}) {
+  if (!contactObj) {
     return null;
   }
   try {

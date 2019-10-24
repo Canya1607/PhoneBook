@@ -4,7 +4,7 @@ import {} from '../../../actions/types';
 const mapStateToProps = state => {
   return {
     activeUser: state.users.activeUser,
-    contacts: state.contacts.contacts,
+    activeContacts: state.contacts.activeContacts,
   };
 };
 

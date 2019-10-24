@@ -1,19 +1,17 @@
 import AsyncStorage from '@react-native-community/async-storage';
 import store from '../store';
-import {SET_USERS, SET_USER, SET_CONTACTS} from '../actions/types';
+import {SET_USER, SET_CONTACTS} from '../actions/types';
 
 async function getUsers() {
-  console.log('\n\n\n\n\n');
   console.log('%cgetUsers()', 'color: #ff0000');
 
   try {
     const users = await AsyncStorage.getItem('users');
-    if (users !== null) {
+    if (users) {
       // We have data
       console.log('%cWe have data', 'color: #00ff00');
       console.log(users);
 
-      // store.dispatch({type: SET_USERS, payload: JSON.parse(users)});
       return JSON.parse(users);
     } else {
       return null;
@@ -27,7 +25,6 @@ async function getUsers() {
 
 const getUser = async userObj => {
   console.log('%cgetUser()', 'color: #ff00aa');
-  console.log(userObj);
 
   try {
     const users = await getUsers();
@@ -41,7 +38,6 @@ const getUser = async userObj => {
           }
         }
       }
-
       console.log('%cWe have user', 'color: #00ff00');
       console.log(user);
 
@@ -108,20 +104,4 @@ const getContactsById = async id => {
   }
 };
 
-const getKeys = async () => {
-  console.log('%cgetKeys()', 'color: #ff0000');
-
-  try {
-    const value = await AsyncStorage.getAllKeys();
-    if (value !== null) {
-      console.log(value);
-      return value;
-    }
-  } catch (error) {
-    // Error retrieving data
-    console.log('%cGET KEYS ERROR', 'color: #ff0000');
-    console.log(error);
-  }
-};
-
-export {getUsers, getUser, getContacts, getContactsById, getKeys};
+export {getUsers, getUser, getContacts, getContactsById};

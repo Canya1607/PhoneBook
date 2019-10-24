@@ -1,4 +1,4 @@
-import {getUsers, getUser, getContacts, getContactsById, getKeys} from './GET';
+import {getUsers, getUser, getContacts, getContactsById} from './GET';
 import {removeUser, removeContact, removeContacts, _clearAll} from './REMOVE';
 import {addUser, addContact} from './ADD';
 import {updateContact} from './UPDATE';
@@ -8,16 +8,16 @@ export default {
   addUser,
   addContact,
   //GET
-  getUsers,
   getUser,
+  getUsers,
   getContacts,
   getContactsById,
-  getKeys,
   //REMOVE
   removeUser,
   removeContact,
   removeContacts,
-  _clearAll,
   ///UPDATE
   updateContact,
+  //SPECIAL
+  _clearAll,
 };

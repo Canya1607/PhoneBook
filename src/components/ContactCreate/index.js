@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import React from 'react';
 import {View, Text, TouchableOpacity} from 'react-native';
 import {CREATE} from '../../constants/detailsTypes';
@@ -10,12 +11,7 @@ const ContactCreate = ({navigation, userId}) => {
         navigation.navigate('Details', {
           type: CREATE,
           userId: userId,
-          avatar: null,
-          name: null,
-          surname: null,
-          work: null,
-          address: null,
-          phone: null,
+          avatar: null, name: null, surname: null, work: null, address: null, phone: null,
         })
       }>
       <View style={styles.container}>

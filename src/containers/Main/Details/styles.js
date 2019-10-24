@@ -8,11 +8,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginVertical: 16,
   },
-  credits: {
-    flexDirection: 'row',
-    justifyContent: 'center',
-    backgroundColor: '#F0F0F0',
-  },
 });
 
 export default styles;

@@ -1,3 +1,4 @@
+/* eslint-disable no-bitwise */
 import AsyncStorage from '@react-native-community/async-storage';
 import {getUsers, getContacts} from './GET';
 import {SET_USER} from '../actions/types';
@@ -9,29 +10,28 @@ const addUser = async userObj => {
   try {
     const prevUsersArr = await getUsers();
     const usersArr = [];
-    let lastId = 1;
+
     if (prevUsersArr) {
-      lastId = prevUsersArr.length + 1;
       for (let i = 0; i < prevUsersArr.length; i++) {
         const el = prevUsersArr[i];
         if (el.login === userObj.login) {
           return null;
         }
       }
-      prevUsersArr.map(x => usersArr.push(x));
     }
-    const newUserObj = {id: lastId, ...userObj};
+    prevUsersArr.map(x => usersArr.push(x));
 
     console.log('%cprevUsersArr', 'color: #ffff00');
     console.log(prevUsersArr);
 
+    const uniqueId = `u${(~~(Math.random() * 1e8)).toString(16)}`;
+    const newUserObj = {id: uniqueId, ...userObj};
     usersArr.push(newUserObj);
+
     await AsyncStorage.setItem('users', JSON.stringify(usersArr));
 
     delete newUserObj.password;
     store.dispatch({type: SET_USER, payload: newUserObj});
-
-    return newUserObj;
   } catch (error) {
     // Error saving data
     console.log('%cADD USER', 'color: #ff0000');
@@ -40,7 +40,7 @@ const addUser = async userObj => {
 };
 
 /**
- * @param {*} { id: "cf3432423", userId: 1, name: "NAME", surname: "SURNAME", work: "WORK", address: "ADDRESS", phone: "PHONE"}
+ * @param contactsObj {*id: "cf3432423", userId: 1, name: "NAME", surname: "SURNAME", work: "WORK", address: "ADDRESS", phone: "PHONE"}
  */
 const addContact = async contactsObj => {
   console.log('%caddContact()', 'color: #ff0000');

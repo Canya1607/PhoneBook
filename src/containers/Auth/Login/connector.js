@@ -2,7 +2,6 @@ import {connect} from 'react-redux';
 
 const mapStateToProps = state => {
   return {
-    users: state.users.users,
     activeUser: state.users.activeUser,
   };
 };

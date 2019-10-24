@@ -1,5 +1,3 @@
-const SHOW = 'SHOW';
-const EDIT = 'EDIT';
-const CREATE = 'CREATE';
-
-export {SHOW, EDIT, CREATE};
+export const SHOW = 'SHOW';
+export const EDIT = 'EDIT';
+export const CREATE = 'CREATE';

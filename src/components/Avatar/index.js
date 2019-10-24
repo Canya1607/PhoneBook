@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, Image, TouchableOpacity} from 'react-native';
+import {View, Image, TouchableOpacity, Platform} from 'react-native';
 import ImagePicker from 'react-native-image-picker';
 import styles from './styles';
 
@@ -36,7 +36,9 @@ class Avatar extends React.Component {
       } else if (response.customButton) {
         console.log('User tapped custom button: ', response.customButton);
       } else {
-        const source = {uri: `file://${response.path}`};
+        const source = {
+          uri: Platform.OS === 'ios' ? response.uri : `file://${response.path}`,
+        };
 
         // You can also display the image using data:
         // const source = {uri: 'data:image/jpeg;base64,' + response.data};

@@ -21,10 +21,9 @@ class Contacts extends Component {
   static getDerivedStateFromProps(nextProps, prevState) {
     console.log(nextProps);
     console.log(prevState);
-    if (JSON.stringify(prevState.data) !== JSON.stringify(nextProps.contacts)) {
-      console.log('UPDATED');
+    if (JSON.stringify(prevState.data) !== JSON.stringify(nextProps.activeContacts)) {
       return {
-        data: nextProps.contacts,
+        data: nextProps.activeContacts,
       };
     }
     return null;
@@ -42,8 +41,8 @@ class Contacts extends Component {
     this.focusListener.remove();
   }
 
-  onDelete = async contObj => {
-    await Storage.removeContact(contObj);
+  onDelete = async contactObj => {
+    await Storage.removeContact(contactObj);
   }
 
   render() {

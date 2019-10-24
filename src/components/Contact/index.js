@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import React from 'react';
 import {
   View,
@@ -15,23 +16,18 @@ const phoneOS = Platform.OS === 'android' ? 'tel:' : 'tel://';
 
 const Contact = ({navigation, contact, onDelete}) => {
   const {id, userId, avatar, name, surname, work, address, phone} = contact;
-  const callAlert = () => {
-    Alert.alert(
-      `Do you want to delete ${contact.name} ?`,
-      '',
-      [
+
+  const askDelete = () =>
+  {
+    Alert.alert(`Do you want to delete ${contact.name} ?`, '', [
         {
-          text: 'Cancel',
-          onPress: () => console.log('Cancel Pressed'),
-          style: 'cancel',
+          text: 'Cancel', onPress: () => console.log('Cancel Pressed'), style: 'cancel',
         },
         {
-          text: 'OK',
-          onPress: onDelete,
-          style: 'destructive',
+          text: 'OK', onPress: onDelete, style: 'destructive',
         },
       ],
-      {cancelable: false},
+      { cancelable: false },
     );
   };
 
@@ -40,17 +36,13 @@ const Contact = ({navigation, contact, onDelete}) => {
       onPress={() =>
         navigation.navigate('Details', {
           type: SHOW,
-          id,
-          userId,
-          avatar,
-          name,
-          surname,
-          work,
-          address,
-          phone,
+          id, userId,
+          avatar, name, surname, work, address, phone,
         })
       }
-      onLongPress={() => Linking.openURL(`${phoneOS}${phone}`)}>
+      onLongPress={() =>
+        Linking.openURL(`${phoneOS}${phone}`)
+      }>
       <View style={styles.container}>
         <View style={styles.contact}>
           <Image
@@ -67,13 +59,8 @@ const Contact = ({navigation, contact, onDelete}) => {
           onPress={() =>
             navigation.navigate('Details', {
               type: EDIT,
-              id,
-              userId,
-              name,
-              surname,
-              work,
-              address,
-              phone,
+              id, userId,
+              avatar, name, surname, work, address, phone,
             })
           }>
           <Image
@@ -81,7 +68,7 @@ const Contact = ({navigation, contact, onDelete}) => {
             source={require('../../assets/images/edit.png')}
           />
         </TouchableOpacity>
-        <TouchableOpacity onPress={() => callAlert()}>
+        <TouchableOpacity onPress={() => askDelete()}>
           <Image
             style={styles.delete}
             source={require('../../assets/images/delete.png')}

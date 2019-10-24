@@ -66,7 +66,7 @@ const getContacts = async () => {
       console.log('%cWe have contacts', 'color: #00ff00');
       console.log(contacts);
 
-      store.dispatch({type: SET_CONTACTS, payload: JSON.parse(contacts)});
+      // store.dispatch({type: SET_CONTACTS, payload: JSON.parse(contacts)});
       return JSON.parse(contacts);
     } else {
       return null;
@@ -79,28 +79,28 @@ const getContacts = async () => {
 };
 
 const getContactsById = async id => {
-  console.log('%cgetContact()', 'color: #ff00aa');
+  console.log('%cgetContactsById()', 'color: #ff00aa');
   console.log(id);
 
-  if (id < 1 || id === null || id === undefined) {
-    return null;
-  }
   try {
-    const contacts = await getContacts();
-    if (contacts === null) {
+    const data = await AsyncStorage.getItem('contacts');
+    if (data) {
+      const contacts = JSON.parse(data);
+      const newContacts = [];
+      contacts.map(x => {
+        if (x.userId === id) {
+          newContacts.push(x);
+        }
+      });
+
+      console.log('%cWe have contacts by id', 'color: #00ff00');
+      console.log(newContacts);
+
+      store.dispatch({type: SET_CONTACTS, payload: newContacts});
+      return newContacts;
+    } else {
       return null;
     }
-    const newContacts = [];
-    contacts.map(x => {
-      if (x.id === id) {
-        newContacts.push(x);
-      }
-    });
-
-    console.log('%cWe have contacts by id', 'color: #00ff00');
-    console.log(newContacts);
-
-    return newContacts;
   } catch (error) {
     // Error retrieving data
     console.log('%cGET CONTACT ERROR', 'color: #ff0000');

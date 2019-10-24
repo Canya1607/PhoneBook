@@ -24,7 +24,6 @@ const styles = StyleSheet.create({
     height: size.Width * 0.14,
     borderRadius: size.Width * 0.07,
     marginRight: 32,
-    backgroundColor: 'green',
   },
   contact_text: {
     fontSize: 16,

@@ -26,11 +26,11 @@ const addUser = async userObj => {
     console.log(prevUsersArr);
 
     usersArr.push(newUserObj);
-
     await AsyncStorage.setItem('users', JSON.stringify(usersArr));
 
     delete newUserObj.password;
     store.dispatch({type: SET_USER, payload: newUserObj});
+
     return newUserObj;
   } catch (error) {
     // Error saving data

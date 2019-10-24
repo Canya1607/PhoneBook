@@ -7,24 +7,6 @@ import Storage from '../../../async-storage';
 import connector from './connector';
 import styles from './styles';
 
-const data = [
-  {name: 'Anton', surname: 'Samkov', work: 'Designer', address: 'Zhovkivska 53', phone: '+380964821833'},
-  {name: 'Alex', surname: 'Babiy', work: 'IT STEP Student', address: 'Zhovkivska 54', phone: '+380947104745'},
-  {name: 'Jack', surname: 'Buyakov', work: 'Web Designer', address: 'Zhovkivska 55', phone: '+380964821833'},
-  {name: 'Jamily', surname: 'Samkov', work: 'Designer', address: 'Zhovkivska 56', phone: '+380964821833'},
-  {name: 'Jan', surname: 'Samkov', work: 'Designer', address: 'Zhovkivska 57', phone: '+380964821833'},
-  {name: 'Sasha', surname: 'Samkov', work: 'Designer', address: 'Zhovkivska 58', phone: '+380964821833'},
-  {name: 'Slavik', surname: 'Samkov', work: 'Designer', address: 'Zhovkivska 59', phone: '+380964821833'},
-  {name: 'Vova', surname: 'Samkov', work: 'Designer', address: 'Zhovkivska 67', phone: '+380964821833'},
-  {name: 'Vasya', surname: 'Samkov', work: 'Designer', address: 'Zhovkivska 72', phone: '+380964821833'},
-  {name: 'Anton', surname: 'Samkov', work: 'Designer', address: 'Zhovkivska 53', phone: '+380964821833'},
-  {name: 'Alex', surname: 'Babiy', work: 'IT STEP Student', address: 'Zhovkivska 54', phone: '+380947104745'},
-  {name: 'Jack', surname: 'Buyakov', work: 'Web Designer', address: 'Zhovkivska 55', phone: '+380964821833'},
-  {name: 'Jamily', surname: 'Samkov', work: 'Designer', address: 'Zhovkivska 56', phone: '+380964821833'},
-  {name: 'Jan', surname: 'Samkov', work: 'Designer', address: 'Zhovkivska 57', phone: '+380964821833'},
-  {name: 'Sasha', surname: 'Samkov', work: 'Designer', address: 'Zhovkivska 58', phone: '+380964821833'},
-];
-
 class Contacts extends Component {
   static navigationOptions = () => {
     return {
@@ -36,15 +18,11 @@ class Contacts extends Component {
     data: null,
   }
 
-  async componentDidMount() {
-    console.log('componentDidMount');
-    await Storage.getContacts();
-  }
-
   static getDerivedStateFromProps(nextProps, prevState) {
     console.log(nextProps);
     console.log(prevState);
-    if (JSON.stringify(prevState.data) !== JSON.stringify(prevState.contacts)) {
+    if (JSON.stringify(prevState.data) !== JSON.stringify(nextProps.contacts)) {
+      console.log('UPDATED');
       return {
         data: nextProps.contacts,
       };
@@ -52,8 +30,20 @@ class Contacts extends Component {
     return null;
   }
 
-  onDelete = (obj) => {
-    //TODO: Implement when redux will be ready
+  async componentDidMount() {
+    console.log('componentDidMount');
+    console.log(this);
+    this.focusListener = this.props.navigation.addListener('willFocus',async () => {
+      await Storage.getContactsById(this.props.activeUser.id);
+    });
+  }
+
+  componentWillUnmount() {
+    this.focusListener.remove();
+  }
+
+  onDelete = async contObj => {
+    await Storage.removeContact(contObj);
   }
 
   render() {
@@ -66,7 +56,7 @@ class Contacts extends Component {
           initialNumToRender={9}
           keyExtractor={(item, index) => item.name + index}
           renderItem={({item}) => (
-            <Contact navigation={navigation} contact={item} />
+            <Contact navigation={navigation} contact={item} onDelete={() => this.onDelete(item)} />
           )}
         />
       </SafeAreaView>

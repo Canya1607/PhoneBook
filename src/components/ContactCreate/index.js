@@ -9,12 +9,13 @@ const ContactCreate = ({navigation, userId}) => {
       onPress={() =>
         navigation.navigate('Details', {
           type: CREATE,
+          userId: userId,
+          avatar: null,
           name: null,
           surname: null,
           work: null,
           address: null,
           phone: null,
-          userId: userId,
         })
       }>
       <View style={styles.container}>

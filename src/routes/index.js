@@ -8,7 +8,7 @@ import {default as DetailsScreen} from '../containers/Main/Details';
 
 
 import React from 'react';
-import {SafeAreaView, Text, Button, View, TextInput} from 'react-native';
+import {SafeAreaView, Text, Button, View, TextInput, ScrollView} from 'react-native';
 import Storage from '../async-storage';
 class TestScreen extends React.Component {
   state = {
@@ -72,6 +72,7 @@ class TestScreen extends React.Component {
     const contact = { id: 1, name: "NAME", surname: "SURNAME", work: "WORK", address: "ADDRESS", phone: "PHONE"};
     return (
       <SafeAreaView style={{alignItems: 'center', flex: 1}}>
+        <ScrollView>
         <View style={{flexDirection: 'row'}}>
           <View style={{flex: 1}}>{this.state.response1 && this.renderUsers()}</View>
           <View style={{flex: 1}}>{this.state.response3 && this.renderContacts()}</View>
@@ -106,6 +107,7 @@ class TestScreen extends React.Component {
             onChangeText={(text) => this.setState({userId: parseInt(text, 36)})}
           />
         </View>
+        </ScrollView>
       </SafeAreaView>
     );
   }

@@ -11,11 +11,10 @@ import {
 import {EDIT, SHOW} from '../../constants/detailsTypes';
 import styles from './styles';
 
-const phoneOS =
-  Platform.OS === 'android' ? 'tel:+380964821833' : 'telprompt:+380964821833';
+const phoneOS = Platform.OS === 'android' ? 'tel:' : 'tel://';
 
 const Contact = ({navigation, contact, onDelete}) => {
-  const {name, surname, work, address, phone} = contact;
+  const {id, userId, avatar, name, surname, work, address, phone} = contact;
   const callAlert = () => {
     Alert.alert(
       `Do you want to delete ${contact.name} ?`,
@@ -41,6 +40,9 @@ const Contact = ({navigation, contact, onDelete}) => {
       onPress={() =>
         navigation.navigate('Details', {
           type: SHOW,
+          id,
+          userId,
+          avatar,
           name,
           surname,
           work,
@@ -48,17 +50,25 @@ const Contact = ({navigation, contact, onDelete}) => {
           phone,
         })
       }
-      //onLongPress={() => Linking.openURL(phoneOS)}
-    >
+      onLongPress={() => Linking.openURL(`${phoneOS}${phone}`)}>
       <View style={styles.container}>
         <View style={styles.contact}>
-          <View style={styles.avatar} />
+          <Image
+            style={styles.avatar}
+            source={
+              avatar
+                ? avatar
+                : require('../../assets/images/avatar_default.png')
+            }
+          />
           <Text style={styles.contact_text}>{contact.name}</Text>
         </View>
         <TouchableOpacity
           onPress={() =>
             navigation.navigate('Details', {
               type: EDIT,
+              id,
+              userId,
               name,
               surname,
               work,

@@ -5,14 +5,23 @@ import styles from './styles';
 
 class Avatar extends React.Component {
   state = {
-    avatarSource: null,
+    source: null,
   };
+
+  static getDerivedStateFromProps(nextProps, prevState) {
+    if (nextProps.source !== prevState.source) {
+      return {
+        source: nextProps.source,
+      };
+    }
+    return null;
+  }
 
   myFunction = () => {
     const options = {
       title: 'Select Avatar',
-      customButtons: [{name: 'fb', title: 'Choose Photo from Facebook'}],
       storageOptions: {
+        // cameraRoll: true,
         skipBackup: true,
         path: 'images',
       },
@@ -27,25 +36,27 @@ class Avatar extends React.Component {
       } else if (response.customButton) {
         console.log('User tapped custom button: ', response.customButton);
       } else {
-        // const source = {uri: response.uri};
+        const source = {uri: `file://${response.path}`};
 
         // You can also display the image using data:
-        const source = {uri: 'data:image/jpeg;base64,' + response.data};
-        this.setState({avatarSource: source});
+        // const source = {uri: 'data:image/jpeg;base64,' + response.data};
+        this.props.onChange(source);
       }
     });
   };
 
   render() {
+    const {source} = this.state;
     return (
-      <TouchableOpacity onPress={() => this.myFunction()}>
+      <TouchableOpacity
+        onPress={() => (this.props.active ? this.myFunction() : null)}>
         <View style={styles.container}>
           <Image
             style={styles.container}
             source={
-              this.state.avatarSource === null
-                ? require('../../assets/images/avatar_default.png')
-                : this.state.avatarSource
+              source
+                ? source
+                : require('../../assets/images/avatar_default.png')
             }
           />
         </View>

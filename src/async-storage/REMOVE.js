@@ -1,6 +1,8 @@
 /* eslint-disable prettier/prettier */
 import AsyncStorage from '@react-native-community/async-storage';
-import {getUsers, getContacts} from './GET';
+import store from '../store';
+import {SET_CONTACTS} from '../actions/types';
+import {getUsers, getContacts, getContactsById} from './GET';
 
 const removeUser = async id => {
   console.log('%cremoveUser()', 'color: #ff0000');
@@ -54,7 +56,7 @@ const removeContacts = async id => {
 };
 
 /**
- * @param {*} { id: 1, name: "NAME", surname: "SURNAME", work: "WORK", address: "ADDRESS", phone: "PHONE"} 
+ * @param {*} { id: "c34sdf3", userId: 1, name: "NAME", surname: "SURNAME", work: "WORK", address: "ADDRESS", phone: "PHONE"}
  */
 const removeContact = async contactObj => {
   console.log('%cremoveContact()', 'color: #00ff00');
@@ -69,7 +71,9 @@ const removeContact = async contactObj => {
         newContacts.push(x);
       }
     });
+
     await AsyncStorage.setItem('contacts', JSON.stringify(newContacts));
+    await getContactsById(contactObj.userId);
   } catch (error) {
     console.log('%cREMOVE CONTACT ERROR', 'color: #ff0000');
     console.log(error);

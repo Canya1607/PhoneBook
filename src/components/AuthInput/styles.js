@@ -12,17 +12,17 @@ const styles = StyleSheet.create({
     width: size.Width * 0.19,
     textAlign: 'right',
     alignSelf: 'center',
-    fontSize: 18,
   },
   input: {
     width: size.Width * 0.58,
-    height: 36,
-    padding: 6,
+    // height: 40,
+    padding: 8,
     paddingRight: 32,
     borderWidth: 0.5,
     borderRadius: 6,
     borderColor: '#000',
     marginLeft: 12,
+    fontSize: 17,
   },
 });
 

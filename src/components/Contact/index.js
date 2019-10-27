@@ -30,6 +30,7 @@ class Contact extends React.Component {
       toValue: {x: 0, y: 0},
       delay: 80,
       duration: 500,
+      useNativeDriver: true,
     }).start();
   }
 
@@ -47,6 +48,7 @@ class Contact extends React.Component {
         Animated.timing(this.state.opacity, {
           toValue: 0.75,
           duration: 500,
+          useNativeDriver: true,
         }).start();
         this.animatedValue.setOffset({
           x: this._value.x,
@@ -62,6 +64,7 @@ class Contact extends React.Component {
         Animated.timing(this.state.opacity, {
           toValue: 1,
           duration: 500,
+          useNativeDriver: true,
         }).start();
         this.animatedValue.flattenOffset();
         if (this._value.y < 2 && this._value.y > -2) {
@@ -71,18 +74,21 @@ class Contact extends React.Component {
             toValue: {x: 0, y: 0},
             delay: 80,
             duration: 500,
+            useNativeDriver: true,
           }).start();
         } else if (position === 0 && this._value.y < -size.contactHeight) {
           Animated.timing(this.animatedValue, {
             toValue: {x: 0, y: 0},
             delay: 80,
             duration: 500,
+            useNativeDriver: true,
           }).start();
         } else if (position === lastPosition && this._value.y > size.contactHeight) {
           Animated.timing(this.animatedValue, {
             toValue: {x: 0, y: 0},
             delay: 80,
             duration: 500,
+            useNativeDriver: true,
           }).start();
         } else {
           onChangePosition(position, this._value.y);

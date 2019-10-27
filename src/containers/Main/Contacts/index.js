@@ -64,19 +64,21 @@ class Contacts extends Component {
     const {navigation} = this.props;
     const {data} = this.state;
     let comps = [];
-    for (let i = 0; i < data.length; i++) {
-      const el = data[i];
-      comps.push(
-        <Contact
-          childKey={el.name + i}
-          position={i}
-          lastPosition={data.length - 1}
-          onChangePosition={this.changePosition}
-          navigation={navigation}
-          contact={el}
-          onDelete={() => this.onDelete(el)}
-        />,
-      );
+    if (data) {
+      for (let i = 0; i < data.length; i++) {
+        const el = data[i];
+        comps.push(
+          <Contact
+            childKey={el.name + i}
+            position={i}
+            lastPosition={data.length - 1}
+            onChangePosition={this.changePosition}
+            navigation={navigation}
+            contact={el}
+            onDelete={() => this.onDelete(el)}
+          />,
+        );
+      }
     }
 
     return comps;

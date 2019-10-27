@@ -5,6 +5,7 @@ import Contact from '../../../components/Contact';
 import ContactCreate from '../../../components/ContactCreate';
 import Storage from '../../../async-storage';
 import connector from './connector';
+import size from '../../../constants/size';
 import styles from './styles';
 
 class Contacts extends Component {
@@ -45,19 +46,48 @@ class Contacts extends Component {
     await Storage.removeContact(contactObj);
   }
 
+  changePosition = (position, Y) => {
+    const {data} = this.state;
+    let newPosition = position + Math.floor(Y / size.contactHeight) + (Y < 0 ? 1 : 0);
+    if (newPosition > data.length - 1) {
+      newPosition = data.length - 1;
+    } else if (newPosition < 0) {
+      newPosition = 0;
+    }
+    const tmp = data[position];
+    data[position] = data[newPosition];
+    data[newPosition] = tmp;
+    this.setState({data: data});
+  };
+
+  renderContacts = () => {
+    const {navigation} = this.props;
+    const {data} = this.state;
+    let comps = [];
+    for (let i = 0; i < data.length; i++) {
+      const el = data[i];
+      comps.push(
+        <Contact
+          childKey={el.name + i}
+          position={i}
+          lastPosition={data.length - 1}
+          onChangePosition={this.changePosition}
+          navigation={navigation}
+          contact={el}
+          onDelete={() => this.onDelete(el)}
+        />,
+      );
+    }
+
+    return comps;
+  };
+
   render() {
     const {navigation} = this.props;
     return (
       <SafeAreaView style={styles.container}>
         <ContactCreate navigation={navigation} userId={this.props.activeUser.id} />
-        <FlatList
-          data={this.state.data}
-          initialNumToRender={9}
-          keyExtractor={(item, index) => item.name + index}
-          renderItem={({item}) => (
-            <Contact navigation={navigation} contact={item} onDelete={() => this.onDelete(item)} />
-          )}
-        />
+        {this.renderContacts()}
       </SafeAreaView>
     );
   }

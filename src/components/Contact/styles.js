@@ -3,7 +3,6 @@ import size from '../../constants/size';
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
     width: size.Width * 0.85,
     margin: 4,
     padding: 8,

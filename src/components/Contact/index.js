@@ -39,9 +39,6 @@ const Contact = ({navigation, contact, onDelete}) => {
           id, userId,
           avatar, name, surname, work, address, phone,
         })
-      }
-      onLongPress={() =>
-        Linking.openURL(`${phoneOS}${phone}`)
       }>
       <View style={styles.container}>
         <View style={styles.contact}>
@@ -55,6 +52,12 @@ const Contact = ({navigation, contact, onDelete}) => {
           />
           <Text style={styles.contact_text}>{contact.name}</Text>
         </View>
+        <TouchableOpacity onPress={() => Linking.openURL(`${phoneOS}${phone}`)}>
+          <Image
+            style={styles.call}
+            source={require('../../assets/images/call.png')}
+          />
+        </TouchableOpacity>
         <TouchableOpacity
           onPress={() =>
             navigation.navigate('Details', {

@@ -28,11 +28,14 @@ const styles = StyleSheet.create({
   contact_text: {
     fontSize: 16,
   },
+  call: {
+    marginRight: 12,
+  },
   edit: {
     marginRight: 12,
   },
   delete: {
-    marginRight: 6,
+    marginRight: 4,
   },
 });
 

@@ -18,8 +18,8 @@ const addUser = async userObj => {
           return null;
         }
       }
+      prevUsersArr.map(x => usersArr.push(x));
     }
-    prevUsersArr.map(x => usersArr.push(x));
 
     console.log('%cprevUsersArr', 'color: #ffff00');
     console.log(prevUsersArr);
